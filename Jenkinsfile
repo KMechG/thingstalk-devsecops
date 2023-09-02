@@ -40,6 +40,7 @@ pipeline {
             sh 'docker push karydock/thingstalk-app:""$GIT_COMMIT""'
           }
         }
+      }
 
         stage('kubernetes deployment - DEV') {
         steps {
@@ -63,4 +64,3 @@ pipeline {
 
 
     }
-}
