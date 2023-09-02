@@ -36,8 +36,8 @@ pipeline {
         steps {
           withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
             sh 'printenv'
-            sh 'sudo docker build -t Karydock/thingstalk-app:""$GIT_COMMIT"" .'
-            sh 'docker push Karydock/thingstalk-app:""$GIT_COMMIT""'
+            sh 'sudo docker build -t karydock/thingstalk-app:""$GIT_COMMIT"" .'
+            sh 'docker push karydock/thingstalk-app:""$GIT_COMMIT""'
           }
         }
 }
