@@ -40,14 +40,14 @@ pipeline {
 
       stage('SonarQube - SAST') {
         steps {
-          //withSonarQubeEnv('SonarQube') {
-            sh " mvn clean verify sonar:sonar      -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://devsecopsthingstalk.eastus.cloudapp.azure.com:9000     -Dsonar.token=sqp_69f520b397c0167372ef6aa2f7119b761e87494e"
-          //}
-          // timeout(time: 2, unit: 'MINUTES') {
-          //   script {
-          //     waitForQualityGate abortPipeline: true
-          //   }
-          // }
+          withSonarQubeEnv('SonarQube') {
+            sh " mvn clean verify sonar:sonar      -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://devsecopsthingstalk.eastus.cloudapp.azure.com:9000  "
+          }
+          timeout(time: 2, unit: 'MINUTES') {
+            script {
+              waitForQualityGate abortPipeline: true
+            }
+          }
         }
     }
       
