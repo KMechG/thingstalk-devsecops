@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>com.devsecops</groupId>
-	<artifactId>numeric</artifactId>
+	<artifactId>Thingsboard</artifactId>
 	<version>0.0.1</version>
-	<name>numeric</name>
-	<description>Demo for DevSecOps</description>
+	<name>Thingsboard</name>
+	<description>Thingsboard for DevSecOps</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
