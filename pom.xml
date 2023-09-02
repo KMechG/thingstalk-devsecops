@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>com.devsecops</groupId>
-	<artifactId>Thingsboard</artifactId>
+	<artifactId>thingstalk</artifactId>
 	<version>3.5.1</version>
-	<name>Thingsboard</name>
-	<description>Thingsboard for DevSecOps</description>
+	<name>thingstalk</name>
+	<description>thingstalk with DevSecOps</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
