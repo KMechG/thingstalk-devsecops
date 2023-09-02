@@ -40,6 +40,24 @@ pipeline {
             sh 'docker push karydock/thingstalk-app:""$GIT_COMMIT""'
           }
         }
+
+        stage('kubernetes deployment - DEV') {
+        steps {
+          withDockerRegistry([credentialsId: "kubeconfig"]) {
+            
+            sh "sed -i 's#replace#karydock/thingstalk-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
+            sh  "kubectl apply -f k8s_deployment_service.yaml"
+          }
+        }
+
+
+
+
+
+
+
+
+
 }
 
 
