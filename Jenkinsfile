@@ -6,7 +6,7 @@ pipeline {
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
     imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
-    applicationURL="http://devsecops-demo.eastus.cloudapp.azure.com"
+    applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
     applicationURI="/increment/99"
   }
 
