@@ -96,11 +96,10 @@ pipeline {
             },
             "Kubesec Scan": {
               sh "bash kubesec-scan.sh"
+            },
+            "Trivy Scan": {
+              sh "bash trivy-k8s-scan.sh"
             }
-            //,
-            // "Trivy Scan": {
-            //   sh "bash trivy-k8s-scan.sh"
-            // }
           )
         }
     }
@@ -108,34 +107,27 @@ pipeline {
 
 
 
-       stage('OWASP ZAP - DAST') {
-      steps {
-        withKubeConfig([credentialsId: 'kubeconfig']) {
-          sh 'bash zap.sh'
+
+
+
+        stage('K8S Deployment - DEV') {
+            steps {
+              parallel(
+                "Deployment": {
+                  withKubeConfig([credentialsId: 'kubeconfig']) {
+                    sh "bash k8s-deployment.sh"
+                  }
+                },
+                "Rollout Status": {
+                  withKubeConfig([credentialsId: 'kubeconfig']) {
+                    sh "bash k8s-deployment-rollout-status.sh"
+                  }
+                }
+              )
+            }
         }
-      }
-    }
 
 
-
-      stage('K8S Deployment - DEV') {
-          steps {
-            parallel(
-              "Deployment": {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
-                  sh "bash k8s-deployment.sh"
-                }
-              },
-              "Rollout Status": {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
-                  sh "bash k8s-deployment-rollout-status.sh"
-                }
-              }
-            )
-          }
-      }
-
-  }
 
     post {
        always {
@@ -152,6 +144,6 @@ pipeline {
 
   
 
-
+     
 
     }
