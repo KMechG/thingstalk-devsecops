@@ -7,7 +7,7 @@ pipeline {
     serviceName = "devsecops-svc"
     imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
-    applicationURI="/increment/99"
+    applicationURI="increment/99"
   }
 
   stages {
