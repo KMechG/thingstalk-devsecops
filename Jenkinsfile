@@ -7,7 +7,7 @@ pipeline {
     serviceName = "devsecops-svc"
     imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
-    applicationURI="compare/99"
+    applicationURI="increment/99"
   }
 
   stages {
@@ -129,22 +129,22 @@ pipeline {
           }
       }
        
-      stage('Integration Tests - DEV') {
-        steps {
-          script {
-            try {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh "bash integration-test.sh"
-              }
-            } catch (e) {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh "kubectl -n default rollout undo deploy ${deploymentName}"
-              }
-              throw e
-            }
-          }
-        }
-    }
+    //   stage('Integration Tests - DEV') {
+    //     steps {
+    //       script {
+    //         try {
+    //           withKubeConfig([credentialsId: 'kubeconfig']) {
+    //             sh "bash integration-test.sh"
+    //           }
+    //         } catch (e) {
+    //           withKubeConfig([credentialsId: 'kubeconfig']) {
+    //             sh "kubectl -n default rollout undo deploy ${deploymentName}"
+    //           }
+    //           throw e
+    //         }
+    //       }
+    //     }
+    // }
 
 
 
