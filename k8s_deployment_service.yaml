@@ -40,7 +40,7 @@ spec:
   ports:
   - port: 32101
     protocol: TCP
-    targetPort: 8080
+    targetPort: 32101
   selector:
     app: devsecops
   type: NodePort
