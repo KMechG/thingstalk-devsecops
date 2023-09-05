@@ -38,9 +38,9 @@ metadata:
   name: devsecops-svc
 spec:
   ports:
-  - port: 32108
+  - port: 32109
     protocol: TCP
-    targetPort: 32108
+    targetPort: 32109
   selector:
     app: devsecops
   type: NodePort
