@@ -44,7 +44,7 @@ pipeline {
       stage('SonarQube - SAST') {
         steps {
           withSonarQubeEnv('SonarQube') {
-            sh " mvn clean verify sonar:sonar      -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://devsecopsthingstalk.eastus.cloudapp.azure.com:9000  "
+            sh " mvn clean verify sonar:sonar    -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://devsecopsthingstalk.eastus.cloudapp.azure.com:9000  "
           }
           timeout(time: 2, unit: 'MINUTES') {
             script {
