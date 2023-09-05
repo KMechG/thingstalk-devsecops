@@ -12,7 +12,7 @@ echo $(id -u):$(id -g)
 docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -c zap_rules -r zap_report.html
 
 exit_code=$?
-
+ls -al
 
 # HTML Report
  sudo mkdir -p owasp-zap-report
