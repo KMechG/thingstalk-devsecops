@@ -15,6 +15,7 @@ public class NumericController {
 	private static final String baseURL = "http://node-service:5000/plusone";
 	//private static final String baseURL = "http://localhost:5000/plusone";
 	
+	
 	RestTemplate restTemplate = new RestTemplate();
 	
 	@RestController
