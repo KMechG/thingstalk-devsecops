@@ -5,3 +5,7 @@
 # You can add your own messages to each rule by appending them after a tab on each line.
 100001	IGNORE	http://devsecopsthingstalk.eastus.cloudapp.azure.com:32683/
 100000	IGNORE	http://devsecopsthingstalk.eastus.cloudapp.azure.com:32683/
+        IGNORE  http://devsecopsthingstalk.eastus.cloudapp.azure.com:32683/increment
+        IGNORE  http://devsecopsthingstalk.eastus.cloudapp.azure.com:32683/increment?name=abc
+        IGNORE  http://devsecopsthingstalk.eastus.cloudapp.azure.com:32683/compare
+        IGNORE  http://devsecopsthingstalk.eastus.cloudapp.azure.com:32683/v3
