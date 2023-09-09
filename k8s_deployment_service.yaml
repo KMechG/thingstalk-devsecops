@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: devsecops
-  name: devsecops
+    app: tb-node-0
+  name: tb-node-0
 spec:
   replicas: 2
   selector:
@@ -21,7 +21,7 @@ spec:
       serviceAccountName: default
       containers:
       - image: replace
-        name: devsecops-container
+        name: tb-node-0-container
         volumeMounts:
         - mountPath: /tmp
           name: vol
@@ -34,13 +34,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: devsecops
-  name: devsecops-svc
+    app: tb-node-0
+  name: tb-node-0-svc
 spec:
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: devsecops
+    app: tb-node-0
   type: NodePort
