@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: tb-node-0
-  name: tb-node-0
+    app: tb-node
+  name: tb-node
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: tb-node-0
+      app: tb-node
   strategy: {}
   template:
     metadata:
       labels:
-        app: tb-node-0
+        app: tb-node
     spec:
       volumes:
       - name: vol
@@ -21,7 +21,7 @@ spec:
       serviceAccountName: default
       containers:
       - image: replace
-        name: tb-node-0-container
+        name: tb-node-container
         volumeMounts:
         - mountPath: /tmp
           name: vol
@@ -34,13 +34,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: tb-node-0
-  name: tb-node-0-svc
+    app: tb-node
+  name: tb-node-svc
 spec:
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: tb-node-0
+    app: tb-node
   type: NodePort
