@@ -2,9 +2,9 @@ pipeline {
   agent any
 
   environment {
-    deploymentName = "tb-node"
-    containerName = "tb-node-container"
-    serviceName = "tb-node-svc"
+    deploymentName = "devsecops"
+    containerName = "devsecops-container"
+    serviceName = "devsecops-svc"
     imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
     applicationURI="increment/99"
