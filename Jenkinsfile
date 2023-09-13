@@ -5,7 +5,8 @@ pipeline {
     deploymentName = "tb-node"
     containerName = "tb-node-container"
     serviceName = "tb-node-svc"
-    imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
+    #imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
+    imageName = "karydock/thingstalk-app"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
     applicationURI="increment/99"
     COSIGN_PASSWORD=credentials('cosign-password')
@@ -85,21 +86,21 @@ pipeline {
         steps {
           withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
             sh 'printenv'
-            sh 'sudo docker build -t karydock/thingstalk-app:""$IMAGE_VERSION"" .'
-            sh 'docker push karydock/thingstalk-app:""$IMAGE_VERSION""'
+            sh 'sudo docker build -t ""$imageName"" .'
+            sh 'docker push ""$imageName""'
           }
         }
       }
       stage('sign the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign sign --key $COSIGN_PRIVATE_KEY karydock/thingstalk-app:""$IMAGE_VERSION"" '
+        sh 'cosign sign --key $COSIGN_PRIVATE_KEY ""$imageName"" '
       }
     }
      stage('verify the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign verify --key $COSIGN_PUBLIC_KEY karydock/thingstalk-app:""$IMAGE_VERSION""'
+        sh 'cosign verify --key $COSIGN_PUBLIC_KEY ""$imageName"" '
       }
     }
 
