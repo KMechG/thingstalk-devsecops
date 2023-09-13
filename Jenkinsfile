@@ -5,8 +5,8 @@ pipeline {
     deploymentName = "tb-node"
     containerName = "tb-node-container"
     serviceName = "tb-node-svc"
-    //imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
-    imageName = "docker.io/karydock/thingstalk-app"
+    imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
+    //imageName = "docker.io/karydock/thingstalk-app"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
     applicationURI="increment/99"
     COSIGN_PASSWORD=credentials('cosign-password')
@@ -94,7 +94,7 @@ pipeline {
       stage('sign the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign sign --key $COSIGN_PRIVATE_KEY $imageName '
+        sh 'cosign sign --key $COSIGN_PRIVATE_KEY $imageName -y'
       }
     }
      stage('verify the container image') {
