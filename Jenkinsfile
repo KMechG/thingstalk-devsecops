@@ -5,7 +5,7 @@ pipeline {
     deploymentName = "tb-node"
     containerName = "tb-node-container"
     serviceName = "tb-node-svc"
-    #imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
+    //imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
     imageName = "karydock/thingstalk-app"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
     applicationURI="increment/99"
