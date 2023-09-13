@@ -6,7 +6,7 @@ pipeline {
     containerName = "tb-node-container"
     serviceName = "tb-node-svc"
     //imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
-    imageName = "karydock/thingstalk-app"
+    imageName = "docker.io/karydock/thingstalk-app"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
     applicationURI="increment/99"
     COSIGN_PASSWORD=credentials('cosign-password')
