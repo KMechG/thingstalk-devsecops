@@ -86,21 +86,21 @@ pipeline {
         steps {
           withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
             sh 'printenv'
-            sh 'sudo docker build -t ""$imageName"" .'
-            sh 'docker push ""$imageName""'
+            sh 'sudo docker build -t $imageName .'
+            sh 'docker push $imageName'
           }
         }
       }
       stage('sign the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign sign --key $COSIGN_PRIVATE_KEY ""$imageName"" '
+        sh 'cosign sign --key $COSIGN_PRIVATE_KEY $imageName '
       }
     }
      stage('verify the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign verify --key $COSIGN_PUBLIC_KEY ""$imageName"" '
+        sh 'cosign verify --key $COSIGN_PUBLIC_KEY $imageName '
       }
     }
 
