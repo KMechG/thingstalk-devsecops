@@ -11,6 +11,7 @@ pipeline {
     COSIGN_PASSWORD=credentials('cosign-password')
     COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
      COSIGN_PUBLIC_KEY=credentials('cosign-public-key')
+      IMAGE_VERSION='3.5.0'
   }
 
   stages {
@@ -84,21 +85,21 @@ pipeline {
         steps {
           withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
             sh 'printenv'
-            sh 'sudo docker build -t karydock/thingstalk-app:""$GIT_COMMIT"" .'
-            sh 'docker push karydock/thingstalk-app:""$GIT_COMMIT""'
+            sh 'sudo docker build -t karydock/thingstalk-app:""$IMAGE_VERSION"" .'
+            sh 'docker push karydock/thingstalk-app:""$IMAGE_VERSION""'
           }
         }
       }
       stage('sign the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign sign --key $COSIGN_PRIVATE_KEY karydock/thingstalk-app:""$GIT_COMMIT"" '
+        sh 'cosign sign --key $COSIGN_PRIVATE_KEY karydock/thingstalk-app:""$IMAGE_VERSION"" '
       }
     }
      stage('verify the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign verify --key $COSIGN_PUBLIC_KEY karydock/thingstalk-app:""$GIT_COMMIT""'
+        sh 'cosign verify --key $COSIGN_PUBLIC_KEY karydock/thingstalk-app:""$IMAGE_VERSION""'
       }
     }
 
