@@ -8,6 +8,9 @@ pipeline {
     imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
     applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
     applicationURI="increment/99"
+    COSIGN_PASSWORD=credentials('cosign-password')
+    COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
+     COSIGN_PUBLIC_KEY=credentials('cosign-public-key')
   }
 
   stages {
@@ -86,7 +89,18 @@ pipeline {
           }
         }
       }
-
+      stage('sign the container image') {
+      steps {
+        sh 'cosign version'
+        sh 'cosign sign --key $COSIGN_PRIVATE_KEY karydock/thingstalk-app:""$GIT_COMMIT"" '
+      }
+    }
+     stage('verify the container image') {
+      steps {
+        sh 'cosign version'
+        sh 'cosign verify --key $COSIGN_PUBLIC_KEY karydock/thingstalk-app:""$GIT_COMMIT""'
+      }
+    }
 
       stage('Vulnerability Scan - Kubernetes') {
         steps {
