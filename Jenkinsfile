@@ -93,14 +93,18 @@ pipeline {
       }
       stage('sign the container image') {
       steps {
+        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
         sh 'cosign version'
         sh 'cosign sign --key $COSIGN_PRIVATE_KEY $imageName -y'
+        }
       }
     }
      stage('verify the container image') {
       steps {
+        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
         sh 'cosign version'
         sh 'cosign verify --key $COSIGN_PUBLIC_KEY $imageName '
+        }
       }
     }
 
