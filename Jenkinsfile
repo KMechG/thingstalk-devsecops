@@ -6,7 +6,7 @@ pipeline {
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
     imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
-    applicationURL="http://devsecopsthingstalk.eastus.cloudapp.azure.com"
+    applicationURL="http://devsecopscicdthingstalk.eastus.cloudapp.azure.com"
     applicationURI="/increment/99"
   }
 
@@ -44,7 +44,7 @@ pipeline {
       stage('SonarQube - SAST') {
         steps {
           withSonarQubeEnv('SonarQube') {
-            sh " mvn clean verify sonar:sonar      -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://devsecopsthingstalk.eastus.cloudapp.azure.com:9000  "
+            sh " mvn clean verify sonar:sonar      -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://devsecopscicdthingstalk.eastus.cloudapp.azure.com:9000  "
           }
           timeout(time: 2, unit: 'MINUTES') {
             script {
