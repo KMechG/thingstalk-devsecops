@@ -84,7 +84,7 @@ pipeline {
 
       stage('Docker Build and Push') {
         steps {
-          withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+          withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
             sh 'printenv'
             sh 'sudo docker build -t $imageName .'
             sh 'docker push $imageName'
@@ -93,7 +93,7 @@ pipeline {
       }
       stage('sign the container image') {
       steps {
-        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+        withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
         sh 'cosign version'
         sh 'cosign sign --key $COSIGN_PRIVATE_KEY $imageName -y'
         }
@@ -101,7 +101,7 @@ pipeline {
     }
      stage('verify the container image') {
       steps {
-        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+        withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
         sh 'cosign version'
         sh 'cosign verify --key $COSIGN_PUBLIC_KEY $imageName '
         }
