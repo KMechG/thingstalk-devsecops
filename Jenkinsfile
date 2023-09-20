@@ -137,7 +137,7 @@ pipeline {
             parallel(
               "Deployment": {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
-	           sh 'kubectl create deployment nx1 --image=nginx'
+	          
                   sh "bash k8s-deployment.sh"
                 }
               },
