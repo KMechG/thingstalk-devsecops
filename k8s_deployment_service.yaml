@@ -44,4 +44,4 @@ spec:
     targetPort: 8080
   selector:
     app: tb-node
-  type: NodePort
+  type: LoadBalancer
