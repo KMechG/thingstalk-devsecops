@@ -7,7 +7,7 @@ pipeline {
     serviceName = "tb-node-svc"
     imageName = "karydock/thingstalk-app:${GIT_COMMIT}"
     //imageName = "docker.io/karydock/thingstalk-app"
-    applicationURL="http://devsecopscicdthingstalk.eastus.cloudapp.azure.com"
+    applicationURL="http://20.49.135.102:8080"
     applicationURI="increment/99"
     COSIGN_PASSWORD=credentials('cosign-password')
     COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
