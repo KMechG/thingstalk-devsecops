@@ -39,7 +39,7 @@ public class NumericController {
 		@GetMapping("/increment/{value}")
 		public int increment(@PathVariable int value) {
 			// Increment the value by 1 and return it
-			int newValue = value + 50;
+			int newValue = value + 70;
 			return newValue;
 		}
 	}
