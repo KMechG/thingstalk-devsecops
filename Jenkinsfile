@@ -46,6 +46,15 @@ pipeline {
         
       }
 
+      stage('SonarQube - SAST 2') {
+        steps {
+         sh "mvn clean verify sonar:sonar -Dsonar.projectKey=devsecops-thingstalk -Dsonar.projectName='devsecops-thingstalk' -Dsonar.host.url=http://devsecopscicdthingstalk.eastus.cloudapp.azure.com:9000 -Dsonar.token=sqp_57c886bc6a492ebfe17bd9173c67081e10493a01"
+
+	}
+      }
+
+
+	  
     
    
 
