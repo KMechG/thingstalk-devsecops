@@ -1,8 +1,8 @@
 pipeline {
   agent any
-tools {
+  tools {
         maven 'Maven 3.9.4'
-        jdk 'Java 17.0.4.1'
+       
     }
   environment {
     deploymentName = "tb-node"
