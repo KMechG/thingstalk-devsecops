@@ -1,9 +1,6 @@
 pipeline {
   agent any
-  tools {
-        maven 'Maven 3.9.4'
-       
-    }
+  
   environment {
     deploymentName = "tb-node"
     containerName = "tb-node-container"
