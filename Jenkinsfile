@@ -53,7 +53,7 @@ pipeline {
       stage('SonarQube - SAST') {
         steps {
           withSonarQubeEnv('SonarQube') {
-            sh " mvn clean verify sonar:sonar    -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://172.17.0.3:9000"
+            sh " mvn clean verify sonar:sonar    -Dsonar.projectKey=thingstalk-devsecops      -Dsonar.projectName='thingstalk-devsecops'   -Dsonar.host.url=http://devsecopscicdthingstalk.eastus.cloudapp.azure.com:9000"
           }
           timeout(time: 2, unit: 'MINUTES') {
             script {
@@ -140,13 +140,13 @@ pipeline {
           steps {
             parallel(
               "Deployment": {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
+                withKubeConfig([credentialsId: 'kubeconfigaks']) {
 	          
                   sh "bash k8s-deployment.sh"
                 }
               },
               "Rollout Status": {
-                withKubeConfig([credentialsId: 'kubeconfig']) {
+                withKubeConfig([credentialsId: 'kubeconfigaks']) {
                   sh "bash k8s-deployment-rollout-status.sh"
                 }
               }
@@ -158,11 +158,11 @@ pipeline {
         steps {
           script {
             try {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
+              withKubeConfig([credentialsId: 'kubeconfigaks']) {
                 sh "bash integration-test.sh"
               }
             } catch (e) {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
+              withKubeConfig([credentialsId: 'kubeconfigaks']) {
                 sh "kubectl -n default rollout undo deploy ${deploymentName}"
               }
               throw e
@@ -177,7 +177,7 @@ pipeline {
 
       stage('OWASP ZAP - DAST') {
         steps {
-          withKubeConfig([credentialsId: 'kubeconfig']) {
+          withKubeConfig([credentialsId: 'kubeconfigaks']) {
             sh 'bash zap.sh'
           }
         }
@@ -214,13 +214,13 @@ pipeline {
         steps {
           parallel(
             "Deployment": {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
+              withKubeConfig([credentialsId: 'kubeconfigaks']) {
                 sh "sed -i 's#replace#${imageName}#g' k8s_PROD-deployment_service.yaml"
                 sh "kubectl -n prod apply -f k8s_PROD-deployment_service.yaml"
               }
             },
             "Rollout Status": {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
+              withKubeConfig([credentialsId: 'kubeconfigaks']) {
                 sh "bash k8s-PROD-deployment-rollout-status.sh"
               }
             }
